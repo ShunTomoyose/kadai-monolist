@@ -19,7 +19,8 @@ class ItemsController < ApplicationController
       })
       
       results.each do |result|
-        item = Item.new(read(result))
+        # item = Item.new(read(result))
+        item = Item.find_or_initialize_by(read(result))
         @items << item
       end
     end
@@ -27,17 +28,17 @@ class ItemsController < ApplicationController
   
   private
   
-  def read(result)
-    code = result['itemCode']
-    name = result['itemName']
-    url = result['itemUrl']
-    image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')
+  # def read(result)
+  #   code = result['itemCode']
+  #   name = result['itemName']
+  #   url = result['itemUrl']
+  #   image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')
     
-    {
-      code: code,
-      name: name,
-      url: url,
-      image_url: image_url,
-    }
-  end
+  #   {
+  #     code: code,
+  #     name: name,
+  #     url: url,
+  #     image_url: image_url,
+  #   }
+  # end
 end
